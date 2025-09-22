@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.blogs.exceptions.ApiException;
 import com.project.blogs.payloads.JwtAuthRequest;
 import com.project.blogs.payloads.JwtAuthResponse;
+import com.project.blogs.payloads.UserDto;
 import com.project.blogs.security.JwtTokenHelper;
+import com.project.blogs.services.UserService;
 
 @RestController
 @RequestMapping("/api/v1/auth/")
@@ -30,6 +33,9 @@ public class AuthController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private UserService userService;
 	
 	
 	@PostMapping("/login")
@@ -61,10 +67,28 @@ public class AuthController {
 			
 		} catch (BadCredentialsException e) {
 			System.out.println("Invalid Details !!");
-			throw new Exception("Invalid Username or Password !!");
+			throw new ApiException("Invalid Username or Password !!");
 		}
 		
 		
 	}
+	
+	//register new user Api
+	@PostMapping("/register")
+	public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
+	
+		UserDto regiseteredUser = this.userService.regiseterNewUser(userDto);
+		
+		return new ResponseEntity<UserDto>(regiseteredUser,HttpStatus.CREATED);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

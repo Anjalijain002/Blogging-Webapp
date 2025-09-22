@@ -29,7 +29,7 @@ public class JwtTokenHelper implements Serializable {
 	
 //	SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 	
-	private String secret = "heckur";
+	private String secret = "thisIsLongKeyWhichIsEnoughForJwtTokenthisIsLongKeyWhichIsEnoughForJwtTokenthisIsLongKeyWhichIsEnoughForJwtToken";
 	
 	//retrieve username from jwt token
 	public String getUsernameFromToken(String token) {
@@ -69,10 +69,10 @@ public class JwtTokenHelper implements Serializable {
 	
 	
 	//while creating a token
-	//1. Define clais of token, like Issuer, Expiration, Subjct, and the Id
-	//2. Sign the jwt using HS512 algorithm and secret key.
-	//3. According to jwt concept serialization(http://tools.ietf.org/html/fraft-ietf-jose
-	// compaction of the jwt to a URL-safe string
+	//1. Define claims of token, like Issuer, Expiration, Subjct, and the Id
+	//2. Sign the JWT using HS512 algorithm and secret key.
+	//3. According to JWT concept serialization(http://tools.ietf.org/html/fraft-ietf-jose
+	// compaction of the JWT to a URL-safe string
 	@SuppressWarnings("deprecation")
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
