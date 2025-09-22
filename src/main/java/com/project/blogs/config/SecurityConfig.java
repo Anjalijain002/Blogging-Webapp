@@ -32,16 +32,6 @@ import jakarta.servlet.Filter;
 @EnableWebMvc
 public class SecurityConfig {
 	
-	
-	public static final String[] PUBLIC_URLS= {
-			"/api/v1/auth/**", 
-			"/v3/api-docs",
-			"/v2/api-docs",
-			"/swagger-resources/**",
-			"/swagger-ui/**",
-			"/webjars/**"
-	};
-	
 
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
@@ -57,7 +47,6 @@ public class SecurityConfig {
 	    http
 	        .csrf().disable()
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(PUBLIC_URLS).permitAll()
 	            .requestMatchers(HttpMethod.GET).permitAll()
 	            .anyRequest().authenticated()
 	        )
