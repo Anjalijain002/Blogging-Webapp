@@ -4,9 +4,10 @@ package com.project.blogs.payloads;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,16 +21,17 @@ public class UserDto {
 
 	private int id;
 	
-	@NotEmpty
-	@Size(min=4, message = "Username must be mininum of 4 Characters!!")
+	@NotEmpty(message = "Username must be min of 4 Characters !!")
+	@Size(min=4, message = "Username must be min of 4 Characters !!")
 	private String name;
 	
 	@Email(message = "Email Address is not Valid!!")
+	@NotEmpty(message = "Email is required")
 	private String email;
 	
 	
-	@NotEmpty
-	@Size(min=3, max=10, message = "Password must be minimum of 3 Character and maximum of 10 Characters!!")
+	@NotEmpty(message = "Password must be min of 3 Chars and max of 10 Chars !!")
+	@Size(min = 3, max = 10, message = "Password must be min of 3 Chars and max of 10 Chars !!")
 	private String password;
 	
 	
@@ -37,4 +39,9 @@ public class UserDto {
 	private String about;
 	
 	private  Set<RoleDto> roles = new HashSet<>();
+	
+	@JsonIgnore
+	public String getPassword() {
+		return this.password;
+	}
 }
